@@ -14,6 +14,7 @@ function CallAPI($method, $url, $data = false)
 
             if ($data)
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
             break;
         case "PUT":
             curl_setopt($curl, CURLOPT_PUT, 1);
@@ -36,8 +37,5 @@ function CallAPI($method, $url, $data = false)
 
     return $result;
 }
-
-
-echo CallAPI("GET", "http://backend-toptal:3000/users");
 
 ?>

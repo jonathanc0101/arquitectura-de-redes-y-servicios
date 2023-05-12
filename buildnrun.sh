@@ -1,2 +1,3 @@
-docker build -t my-php-app .
-docker run -it --rm --name my-running-app my-php-app
+git clone --branch toptal-article-02 https://github.com/makinhs/toptal-rest-series.git
+docker compose build
+docker compose up
