@@ -28,7 +28,7 @@
 	</form>
 
 	<h2>Users</h2>
-	<?php require_once("get_users.php"); ?>
+	<?php require_once("users_section.php"); ?>
 
 </body>
 </html>

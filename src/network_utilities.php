@@ -17,8 +17,12 @@ function CallAPI($method, $url, $data = false)
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
             break;
         case "PUT":
-            curl_setopt($curl, CURLOPT_PUT, 1);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));            
             break;
+        case "DELETE":
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         default:
             if ($data)
                 $url = sprintf("%s?%s", $url, http_build_query($data));

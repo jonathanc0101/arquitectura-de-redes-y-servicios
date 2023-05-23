@@ -7,6 +7,12 @@
         return CallAPI("GET", "http://backend-toptal:3000/users");
     }
 
+    function get_user($id)
+    {
+        return CallAPI("GET", "http://backend-toptal:3000/users/$id");
+    }
+
+
     function insert_user($email, $password, $firstName, $lastName){
         $data = array(
             "email" => $email,
@@ -30,7 +36,9 @@
             "permissionLevel" => $permissionLevel
         );
 
-        $jsonData = json_encode($data);
+        $jsonData = json_encode($data); 
+        echo "\n";
+        echo $jsonData;
         return CallAPI("PUT", "http://backend-toptal:3000/users/$id", $jsonData);
     }
 
