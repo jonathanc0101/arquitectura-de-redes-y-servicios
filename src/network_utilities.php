@@ -42,4 +42,10 @@ function CallAPI($method, $url, $data = false)
     return json_decode($result,TRUE);
 }
 
+function redirect($url, $statusCode = 303)
+{
+   header('Location: ' . $url, true, $statusCode);
+   die();
+}
+
 ?>

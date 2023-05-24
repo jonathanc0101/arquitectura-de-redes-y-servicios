@@ -1,5 +1,6 @@
 <?php 
     require_once('funciones_API.php');
+    require_once('network_utilities.php');
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -8,9 +9,6 @@
 
     $result = insert_user($email, $password, $firstName, $lastName);
 
-    if($result) {
-        echo "<p>User created successfully!</p>";
-    } else {
-        echo "<p>Error creating user. " . $result . "</p>";
-    }
+    redirect('index.php');
+
 ?>
