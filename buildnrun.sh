@@ -1,3 +1,3 @@
-git clone --branch toptal-article-02 https://github.com/makinhs/toptal-rest-series.git
+git clone --branch tp6-backend https://github.com/jonathanc0101/arquitectura-de-redes-y-servicios.git
 docker compose build
 docker compose up
