@@ -68,6 +68,23 @@ class UsersMiddleware {
         req.body.id = req.params.userId;
         next();
     }
+
+    async userCantChangePermission(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        if (
+            'permissionLevel' in req.body &&
+            req.body.permissionLevel !== res.locals.user.permissionLevel
+        ) {
+            res.status(400).send({
+                errors: ['User cannot change permission flags'],
+            });
+        } else {
+            next();
+        }
+    }
 }
 
 export default new UsersMiddleware();
