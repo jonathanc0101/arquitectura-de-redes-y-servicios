@@ -4,8 +4,7 @@ import crypto from 'crypto';
 import { Jwt } from '../../common/types/jwt';
 import usersService from '../../users/services/users.service';
 
-// @ts-expect-error
-const jwtSecret: string = process.env.JWT_SECRET;
+const jwtSecret: string = "My!@!Se3cr8tH4sh3";
 
 class JwtMiddleware {
     verifyRefreshBodyField(
@@ -63,7 +62,7 @@ class JwtMiddleware {
                     res.locals.jwt = jwt.verify(
                         authorization[1],
                         jwtSecret
-                    ) as Jwt;
+                        ) as Jwt;
                     next();
                 }
             } catch (err) {
