@@ -22,7 +22,10 @@ services:
     build: 
       context: ./toptal-rest-series
       dockerfile: ../Dockerfile.node  
+    volumes:
+      - ./toptal-rest-series:/usr/src/app
+      - /usr/src/app/node_modules
+
     ports:
       - 3000:3000
     stdin_open: true
-    command: npm run start
