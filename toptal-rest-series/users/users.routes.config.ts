@@ -18,10 +18,6 @@ export class UsersRoutes extends CommonRoutesConfig {
         this.app
             .route(`/users`)
             .get(
-                jwtMiddleware.validJWTNeeded,
-                permissionMiddleware.permissionFlagRequired(
-                    PermissionFlag.ADMIN_PERMISSION
-                ),
                 UsersController.listUsers
             )
             .post(

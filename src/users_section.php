@@ -9,8 +9,9 @@
     </tr>
 
     <?php
-    require "funciones_API.php";
-    // Supongamos que tenemos un array de usuarios
+
+    require "funciones_API.php";    
+
     $usuarios = get_users();
 
     if(count($usuarios) == 0) {
