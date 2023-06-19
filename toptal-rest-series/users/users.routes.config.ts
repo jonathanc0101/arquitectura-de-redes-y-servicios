@@ -1,6 +1,6 @@
 import { CommonRoutesConfig } from '../common/common.routes.config';
 import UsersController from './controllers/users.controller';
-import BooksController from './controllers/books.controller';
+import BooksController from '../books/controllers/books.controller';
 import UsersMiddleware from './middleware/users.middleware';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../common/middleware/common.permission.middleware';

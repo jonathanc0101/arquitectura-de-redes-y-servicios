@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import debug from 'debug';
 import { CreateUserDto } from '../dto/create.user.dto';
-import { CreateBookDto } from '../dto/create.book.dto';
+import { CreateBookDto } from '../../books/dto/create.book.dto';
 import { PatchUserDto } from '../dto/patch.user.dto';
 import { PutUserDto } from '../dto/put.user.dto';
 
