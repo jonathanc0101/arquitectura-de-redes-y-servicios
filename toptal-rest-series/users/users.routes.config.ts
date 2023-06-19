@@ -1,5 +1,6 @@
 import { CommonRoutesConfig } from '../common/common.routes.config';
 import UsersController from './controllers/users.controller';
+import BooksController from './controllers/books.controller';
 import UsersMiddleware from './middleware/users.middleware';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../common/middleware/common.permission.middleware';
@@ -41,7 +42,8 @@ export class UsersRoutes extends CommonRoutesConfig {
             .get(UsersController.getUserById)
             .delete(UsersController.removeUser);
 
-        this.app.put(`/users/:userId`, [
+        this.app.route(`/users/:userId`)
+        .get( [
             body('email').isEmail(),
             body('password')
                 .isLength({ min: 5 })
@@ -53,10 +55,23 @@ export class UsersRoutes extends CommonRoutesConfig {
             UsersMiddleware.validateSameEmailBelongToSameUser,
             UsersMiddleware.userCantChangePermission,
             permissionMiddleware.permissionFlagRequired(
-                PermissionFlag.PAID_PERMISSION
+                PermissionFlag.FREE_PERMISSION
             ),
             UsersController.put,
         ]);
+
+        this.app.route(`/users/:userId/books`)
+        .get([
+            BooksController.listBooks,
+        ])
+        .post(
+            [
+                // jwtMiddleware.validJWTNeeded,
+                // permissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+                BooksController.createBook,
+            ]
+        )
+        ;
 
         this.app.patch(`/users/:userId`, [
             body('email').isEmail().optional(),

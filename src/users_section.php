@@ -10,7 +10,7 @@
 
     <?php
 
-    require "funciones_API.php";    
+    require_once("funciones_API.php");
 
     $usuarios = get_users();
 

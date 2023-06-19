@@ -1,18 +1,6 @@
 <?php 
     require "network_utilities.php";
 
-    function set_auth_cookies($access_token, $refresh_token){
-        setcookie("access_token",$access_token,time() + 2 * 24 * 60 * 60);
-        setcookie("refresh_token",$refresh_token,time() + 2 * 24 * 60 * 60);
-    }
-
-    function get_auth_cookies(){
-        return array(
-            'access_token' => $_COOKIE['access_token'],
-            'refresh_token' => $_COOKIE['refresh_token']
-        );
-    }
-
     function set_token($email,$password){
         $jsonResponse = get_token($email,$password);
 
@@ -20,9 +8,6 @@
         $refresh_token = $jsonResponse["refreshToken"];
         
         set_auth_cookies($access_token,$refresh_token);
-
-        if(!$jsonResponse["errors"]){
-        }
     }
 
     function get_token($email,$password){

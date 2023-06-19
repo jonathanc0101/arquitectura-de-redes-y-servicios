@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 import debug from 'debug';
 import { CreateUserDto } from '../dto/create.user.dto';
+import { CreateBookDto } from '../dto/create.book.dto';
 import { PatchUserDto } from '../dto/patch.user.dto';
 import { PutUserDto } from '../dto/put.user.dto';
 
@@ -13,6 +14,7 @@ const log: debug.IDebugger = debug('app:in-memory-dao');
  */
 class UsersDao {
     users: Array<CreateUserDto> = [];
+    books: Array<CreateBookDto> = []
 
     constructor() {
         log('Created new instance of UsersDao');
@@ -78,6 +80,17 @@ class UsersDao {
         let currentUser = this.users[objIndex];
         if (currentUser) {
             return currentUser;
+        } else {
+            return null;
+        }
+    }
+
+    async getUserBooks(id: string){
+        const books = this.books.filter(
+            (obj: { user_id: string }) => obj.user_id === id
+        );
+        if (books) {
+            return books;
         } else {
             return null;
         }
