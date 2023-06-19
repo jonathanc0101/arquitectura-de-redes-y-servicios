@@ -72,6 +72,7 @@ export class UsersRoutes extends CommonRoutesConfig {
     this.app.param(`bookId`, booksMiddleware.extractBookId);
     this.app
       .route(`/users/:userId/books/:bookId`)
+      .get([BooksController.getBookById])
       .put([BooksController.put])
       .patch([BooksController.patch])
       .delete([BooksController.removeBook]);

@@ -69,6 +69,7 @@ class BooksDao {
 
 
     async getUserBooks(id: string){
+        console.log(this.books);
         const books = this.books.filter(
             (obj: { user_id: string }) => obj.user_id === id
         );

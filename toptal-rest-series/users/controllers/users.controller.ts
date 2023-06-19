@@ -12,7 +12,7 @@ class UsersController {
   }
 
   async getUserById(req: express.Request, res: express.Response) {
-    const user = await usersService.readById(req.body.id);
+    const user = await usersService.readById(req.body.userId);
     res.status(200).send(user);
   }
 
@@ -26,18 +26,18 @@ class UsersController {
     if (req.body.password) {
       req.body.password = await argon2.hash(req.body.password);
     }
-    log(await usersService.patchById(req.body.id, req.body));
+    log(await usersService.patchById(req.body.userId, req.body));
     res.status(204).send();
   }
 
   async put(req: express.Request, res: express.Response) {
     req.body.password = await argon2.hash(req.body.password);
-    log(await usersService.putById(req.body.id, req.body));
+    log(await usersService.putById(req.body.userId, req.body));
     res.status(204).send();
   }
 
   async removeUser(req: express.Request, res: express.Response) {
-    log(await usersService.deleteById(req.body.id));
+    log(await usersService.deleteById(req.body.userId));
     res.status(204).send();
   }
   
@@ -46,7 +46,7 @@ class UsersController {
     const patchUserDto: PatchUserDto = {
       permissionLevel: parseInt(req.params.permissionLevel),
     };
-    log(await usersService.patchById(req.body.id, patchUserDto));
+    log(await usersService.patchById(req.body.userId, patchUserDto));
     res.status(204).send();
   }
 }

@@ -6,17 +6,27 @@ const log: debug.IDebugger = debug("app:books-controller");
 
 class BooksController{
   async patch(req: express.Request, res: express.Response) {
-    log(await booksService.patchById(req.body.id, req.body));
+    log(await booksService.patchById(req.body.bookId, req.body));
     res.status(204).send();
   }
 
+
+  async getBookById(req: express.Request, res: express.Response) {
+    const book = await booksService.readById(req.body.bookId);
+    res.status(200).send(book);
+  }
+
   async put(req: express.Request, res: express.Response) {
-    log(await booksService.putById(req.body.id, req.body));
+    const bookId = req.body.bookId;
+    req.body.user_id = req.body.userId;
+    delete req.body.userId;
+    delete req.body.bookId;
+    log(await booksService.putById(bookId, req.body));
     res.status(204).send();
   }
 
   async removeBook(req: express.Request, res: express.Response) {
-    log(await booksService.deleteById(req.body.id));
+    log(await booksService.deleteById(req.body.bookId));
     res.status(204).send();
   }
 
@@ -26,8 +36,9 @@ async listBooks(req: express.Request, res: express.Response) {
   }
 
   async createBook(req: express.Request, res: express.Response) {
-    log(await booksService.putById(req.body.id, req.body));
-    res.status(204).send();
+    req.body.user_id = req.body.id;
+    const bookId = await booksService.create(req.body);
+    res.status(201).send({ id: bookId });
   }
 
 }
