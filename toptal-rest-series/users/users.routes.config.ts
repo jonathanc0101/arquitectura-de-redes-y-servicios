@@ -17,6 +17,29 @@ export class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
+    this.app.param(`userId`, UsersMiddleware.extractUserId);
+    this.app.param(`bookId`, booksMiddleware.extractBookId);
+
+    this.app
+    .route(`/users/:userId/books`)
+    .get([BooksController.listBooks])
+    .post([
+      jwtMiddleware.validJWTNeeded,
+      permissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+      BooksController.createBook,
+    ]);
+
+    this.app
+      .route(`/users/:userId/books/:bookId`)
+      .all(
+        jwtMiddleware.validJWTNeeded,
+        permissionMiddleware.onlySameUserOrAdminCanDoThisAction
+      )
+      .get(BooksController.getBookById)
+      .delete(BooksController.removeBook)
+      .put(BooksController.put)
+      .patch(BooksController.patch);
+
     this.app
       .route(`/users`)
       .get(UsersController.listUsers)
@@ -30,7 +53,6 @@ export class UsersRoutes extends CommonRoutesConfig {
         UsersController.createUser
       );
 
-    this.app.param(`userId`, UsersMiddleware.extractUserId);
     this.app
       .route(`/users/:userId`)
       .all(
@@ -59,23 +81,6 @@ export class UsersRoutes extends CommonRoutesConfig {
         ),
         UsersController.put,
       ]);
-
-    this.app
-      .route(`/users/:userId/books`)
-      .get([BooksController.listBooks])
-      .post([
-        // jwtMiddleware.validJWTNeeded,
-        // permissionMiddleware.onlySameUserOrAdminCanDoThisAction,
-        BooksController.createBook,
-      ]);
-
-    this.app.param(`bookId`, booksMiddleware.extractBookId);
-    this.app
-      .route(`/users/:userId/books/:bookId`)
-      .get([BooksController.getBookById])
-      .put([BooksController.put])
-      .patch([BooksController.patch])
-      .delete([BooksController.removeBook]);
 
     this.app.patch(`/users/:userId`, [
       body("email").isEmail().optional(),

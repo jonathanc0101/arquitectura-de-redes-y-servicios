@@ -18,7 +18,6 @@ class BooksController{
 
   async put(req: express.Request, res: express.Response) {
     const bookId = req.body.bookId;
-    req.body.user_id = req.body.userId;
     delete req.body.userId;
     delete req.body.bookId;
     log(await booksService.putById(bookId, req.body));
@@ -26,17 +25,17 @@ class BooksController{
   }
 
   async removeBook(req: express.Request, res: express.Response) {
-    log(await booksService.deleteById(req.body.bookId));
+    log(await booksService.deleteById(req.body.id));
     res.status(204).send();
   }
 
 async listBooks(req: express.Request, res: express.Response) {
-    const books = await booksService.listBooks(req.body.id)
+    const books = await booksService.listBooks(req.body.userId)
     res.status(200).send(books);
   }
 
   async createBook(req: express.Request, res: express.Response) {
-    req.body.user_id = req.body.id;
+    req.body.user_id = req.body.userId;
     const bookId = await booksService.create(req.body);
     res.status(201).send({ id: bookId });
   }

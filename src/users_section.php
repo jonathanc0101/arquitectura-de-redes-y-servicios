@@ -1,11 +1,11 @@
-<h1>Listado de usuarios</h1>
+<h1>Users</h1>
 
 <table>
     <tr>
         <th>Email</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Acciones</th>
+        <th>Name</th>
+        <th>Second name</th>
+        <th> </th>
     </tr>
 
     <?php
@@ -30,13 +30,13 @@
                 <form action="modify_user.php" method="post" style="display: inline;">
                     <input type="hidden" name="id" id="id" value="<?php echo $usuario['id']; ?>">
                     
-                    <button type="submit">Modificar</button>
+                    <button type="submit">Modify</button>
                 </form>
 
                 <form action="delete_user.php" method="post" style="display: inline;">
                     <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
 
-                    <button type="submit">Eliminar</button>
+                    <button type="submit">Delete</button>
                 </form>
             </td>
         </tr>

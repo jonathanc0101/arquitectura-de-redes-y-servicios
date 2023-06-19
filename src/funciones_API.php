@@ -21,6 +21,42 @@
         return CallAPI("POST", "http://backend-toptal:3000/auth",$jsonData);
     }
 
+
+    function get_books($id)
+    {
+        return CallAPI("GET", "http://backend-toptal:3000/users/$id/books");
+    }
+
+    function get_book($userId,$bookId){
+        return CallAPI("GET", "http://backend-toptal:3000/users/$userId/books/$bookId");
+    }
+
+    function insert_book($userId, $title){
+        $data = array(
+            "title" => $title
+        );
+        
+        $jsonData = json_encode($data);
+        return CallAPI("POST", "http://backend-toptal:3000/users/$userId/books", $jsonData);
+    }
+
+
+    function update_book($userId,$bookId,$title){
+        $data = array(
+            "user_id" => $userId,
+            "id" => $bookId,
+            "title" => $title
+        );
+
+        $jsonData = json_encode($data); 
+        
+        return CallAPI("PUT", "http://backend-toptal:3000/users/$userId/books/$bookId", $jsonData);
+    }
+
+    function delete_book($userId,$bookId){
+        return CallAPI("DELETE", "http://backend-toptal:3000/users/$userId/books/$bookId");
+    }
+
     function get_users()
     {
         return CallAPI("GET", "http://backend-toptal:3000/users");
@@ -30,7 +66,6 @@
     {
         return CallAPI("GET", "http://backend-toptal:3000/users/$id");
     }
-
 
     function insert_user($email, $password, $firstName, $lastName){
         $data = array(
@@ -59,7 +94,6 @@
         
         return CallAPI("PUT", "http://backend-toptal:3000/users/$id", $jsonData);
     }
-
 
     // Función para eliminar un usuario
     function delete_user($id){

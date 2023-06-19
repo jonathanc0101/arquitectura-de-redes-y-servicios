@@ -44,7 +44,6 @@
 		<button type="submit">Create</button>
 	</form>
 
-	<h2>Users</h2>
 	<?php require_once("users_section.php"); ?>
 
 </body>
