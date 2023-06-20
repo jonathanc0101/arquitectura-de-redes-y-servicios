@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cifrado de César</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cifrado de César</h1>
+        
+        <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <input type="text" class="form-control" id="mensaje" required>
+        </div>
+        <div class="form-group">
+            <label for="offset">Offset:</label>
+            <input type="number" class="form-control" id="offset" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="codificar()">Codificar</button>
+        <button type="button" class="btn btn-primary" onclick="decodificar()">Decodificar</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
