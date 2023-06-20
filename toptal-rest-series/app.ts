@@ -13,11 +13,36 @@ if (dotenvResult.error) {
     throw dotenvResult.error;
 }
 
+import rateLimit from 'express-rate-limit'
+
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 3000;
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug('app');
+
+const loginLimiter = rateLimit({
+	windowMs: 60 * 1000, // 1 minute
+	max: 5, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+const apiLimiter = rateLimit({
+    windowMs: 60*1000,
+    max: async (request, response) => {
+		if (await isPremium(request.user)) return 15
+		else return 3
+	},
+    message: async (request, response) => {
+		if (await isPremium(request.user))
+			return 'You can only make 15 requests every minute.'
+		else return 'You can only make 3 requests every minute.'
+	},
+})
+
+// Apply the rate limiting middleware to all requests
+app.use(loginLimiter)
 
 app.use(express.json());
 app.use(cors());

@@ -7,7 +7,7 @@
     "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
     "debug": "export DEBUG=* && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon app.ts"
+    "dev": "nodemon app.ts"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "debug": "^4.2.0",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
+    "express-rate-limit": "^6.7.0",
     "express-validator": "^7.0.1",
     "express-winston": "^4.0.5",
     "jsonwebtoken": "^9.0.0",
