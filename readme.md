@@ -1,5 +1,5 @@
 # ¿Cómo uso el proyecto?
-### Yo suelo correr [live server]() (extensión de visual studio code) y luego accedo a cada una de las páginas.
+### Yo suelo correr live server (extensión de visual studio code) y luego accedo a cada una de las páginas.
 
 
 ## Sobre la realización de los ejercicios:
