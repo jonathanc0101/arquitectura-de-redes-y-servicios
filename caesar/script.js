@@ -14,8 +14,37 @@ function doCodificar(mensaje,offset){
     return resultado;
 };
 
+function esValido(intento){
+    const palabrasList = intento.split(" ");
+    for(const palabra of palabrasList){
+        if(palabras.includes(palabra)){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function doBruteforcear(mensaje){
-    return "hola";
+    let intentoActual = mensaje;
+    let offsetActual = 0;
+
+    while(offsetActual <= 26000){
+        intentoActual = doCodificar(intentoActual,offsetActual)
+        
+        if(esValido(intentoActual)){
+            if(offsetActual === 0){
+                return "El mensaje no está encriptado 🔐";                   
+            };
+
+            return intentoActual + "✅\nOffset: " + offsetActual;   
+        }
+   
+
+        offsetActual++;
+    }
+
+    return "No hay resultado 😔";
 }
 
 function codificar() {
@@ -41,7 +70,7 @@ function bruteforcear(){
     const mensaje = document.getElementById('mensaje-cifrado').value;
     const resultado = doBruteforcear(mensaje);
 
-    document.getElementById('resultado-bruteforceado').innerText = "Resultado:" + resultado;
+    document.getElementById('resultado-bruteforceado').innerText = "Resultado: " + resultado;
 }
 
 
