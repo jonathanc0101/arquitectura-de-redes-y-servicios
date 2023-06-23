@@ -1,6 +1,11 @@
-El ejercicio del cifrado de Cesar lo hice con ayuda de chat gpt.
+# ¿Cómo uso el proyecto?
+### Yo suelo correr [live server]() (extensión de visual studio code) y luego accedo a cada una de las páginas.
 
-El ejercicio de vigenere lo hice con ayuda de chatgpt, [wikipedia](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) y [esta página](https://www.nayuki.io/page/vigenere-cipher-javascript)
+
+## Sobre la realización de los ejercicios:
+* El ejercicio del cifrado de Cesar lo hice con ayuda de chatgpt.
+
+* El ejercicio de vigenere lo hice con ayuda de chatgpt, [wikipedia](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) y [esta página](https://www.nayuki.io/page/vigenere-cipher-javascript) que ya realiza una implementación en javascript.
 
 
 ### Los algoritmos de hash (md5, sha-x, etc.) no se utilizan para cifrar mensajes. ¿Por qué?
