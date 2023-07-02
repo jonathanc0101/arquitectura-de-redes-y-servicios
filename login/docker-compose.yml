@@ -1,0 +1,44 @@
+version: '2'
+services:  
+
+  db:
+    container_name: db-login-arys-jc
+    image: postgres:15.2-alpine
+    environment:
+      POSTGRES_DB: postgres-login-jc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  backend:
+    container_name: backend-login-jc
+    build: 
+      context: ./backend
+      dockerfile: ../Dockerfile.node  
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 4000:4000
+    stdin_open: true
+    command: npm run dev
+
+    depends_on:
+      - db
+
+
+  frontend:
+    container_name: frontend-login-jc
+    build: 
+      context: ./frontend
+      dockerfile: ../Dockerfile.node  
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    stdin_open: true
+
+    environment:
+      - BACKEND_URL=backend:3000
+
+    command: npm start
